@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>忘记密码</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="images/favicon.ico" type="images/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script text="text/javascript" src="./js/script.js"></script>
+    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    <!-- import Vue.js -->
+    <script src="./js/vue.min.js"></script>
+    <!-- import iView -->
+    <script src="./js/iview.min.js"></script>
+    <script src="./js/axios_config.js"></script>
+</head>
+
+<body>
+
+<!-- 结构     -->
+<header>
+    <nav>
+        <div class="logo">
+            <img src="images/logo1.png" alt="云课堂">
+        </div>
+        <!-- 导航栏部分 -->
+        <div class="navbar" id="tag">
+            <ul>
+                <li>
+                    <a href="#" class="navbar_border" id="page1">首页</a>
+                    <a href="#" id="page2">课程</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 登录部分 -->
+        <div class="login" id="js-login">
+            <input class="login-submit-show" type="submit" name="log" value="登 录">
+        </div>
+
+        <div class="dropdown" id="people">
+            <div>
+                <img src="./icon-images/个人.png" alt="个人中心">
+            </div>
+            <div class="dropdown-content">
+                <a onclick="person_center()">个人中心</a>
+                <a onclick="quit()">退出</a>
+            </div>
+        </div>
+
+
+        <div class="login-mask" id="mask"></div>
+        <!-- 登录弹窗 -->
+        <div class="login-interface" id="login-interface">
+            <div class="login-interface-frame">
+                <div class="login-close" id="login-close">
+                    <a href="#"><img src="./icon-images/关闭2.png" alt="叉叉" width="20px" height="20px"></a>
+                </div>
+                <div class="login-title">
+                    <ul class="login-title-1">
+                        <li id="log"><a href="#">登录</a></li>
+                        <li id="reg"><a href="#">注册</a></li>
+                    </ul>
+                </div>
+
+                <div class="login-write-frame" id="login-write-frame">
+                    <!-- 登录的内容部分 -->
+                    <div class="login-username">
+                        <!-- 用户名 -->
+                        <div class="login-username-img">
+                            <img src="./icon-images/邮件.png" alt="邮箱">
+                        </div>
+                        <input type="text" name="kong0" placeholder=" 请输入帐号" id="sign-in-userid">
+                    </div>
+
+                    <div class="login-password">
+                        <!-- 密码 -->
+                        <div class="login-password-img">
+                            <img src="./icon-images/密码.png" alt="密码">
+                        </div>
+                        <input type="password" name="kong0" placeholder=" 请输入密码" id="sign-in-password">
+                    </div>
+
+                    <div class="login-forget">
+                        <!-- 忘记密码 -->
+                        <a href="Forget.html">忘记密码?</a>
+                    </div>
+
+                    <div class="login-in" id="login-in">
+                        <!-- 登录进去 -->
+                        <a>进入云课堂</a>
+                    </div>
+
+                    <div class="login-line">
+                        <p>其他登录</p>
+                    </div>
+
+                    <div class="login-other">
+                        <div class="login-other-frame">
+                            <a href="#"><img src="./icon-images/qq.png" alt="其他登录"></a>
+                            <a href="#"><img src="./icon-images/微信.png" alt="其他登录"></a>
+                            <a href="#"><img src="./icon-images/微博.png" alt="其他登录"></a>
+                            <a href="#"><img src="./icon-images/GitHub.png" alt="其他登录"></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 注册内容部分 1 -->
+                <div class="reg-write-frame" id="reg-write-frame">
+                    <div class="login-username">
+                        <!-- 注册用户名 -->
+                        <div class="login-username-img">
+                            <img src="./icon-images/邮件.png" alt="帐号">
+                        </div>
+                        <input type="text" name="kong1" placeholder=" 请输入帐号" id="sign-up-userid">
+                    </div>
+                    <div class="login-username">
+                        <!-- 注册用户名 -->
+                        <div class="login-username-img">
+                            <img src="./icon-images/邮件.png" alt="邮箱">
+                        </div>
+                        <input type="text" name="kong1" placeholder=" 请输入邮箱" id="sign-up-email">
+                    </div>
+
+                    <div class="login-password">
+                        <!-- 注册密码 -->
+                        <div class="login-password-img">
+                            <img src="./icon-images/密码.png" alt="密码">
+                        </div>
+                        <input type="password" name="kong1" placeholder=" 请输入密码" id="sign-up-password">
+                    </div>
+                    <div class="login-password">
+                        <!-- 注册密码 -->
+                        <div class="login-password-img">
+                            <img src="./icon-images/密码.png" alt="密码">
+                        </div>
+                        <input type="password" name="kong1" placeholder=" 再次请输入密码" id="sign-up-again-password">
+                    </div>
+
+                    <div class="verify">
+                        <input type="text" name="kong1" placeholder=" 请输入验证码" id="verify-num">
+                        <!-- <input type="button" class="hmac" value="获取验证码"> -->
+                        <button class="hmac">获取验证码</button>
+                    </div>
+
+                    <div class="reg-in" id="next">
+                        <a href="#">注册</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- 登录错误提示 -->
+        <div class="tips-one" id="t-one">
+            <p>用户名或密码错误</p>
+        </div>
+
+        <!-- 搜索框部分 -->
+        <div class="search">
+            <form action="">
+                <input type="text" name="find" placeholder="请输入关键词">
+                <!-- placeholder占位符 内容输入自动清除默认值 -->
+                <input type="submit" value="查询">
+            </form>
+        </div>
+    </nav>
+</header>
+        <iframe src="iframe_Forget_send_email.html" style="width: 100%;height: 775px" frameborder="0" scrolling="no"></iframe>
+
+    <footer>
+        <div class="container">
+            <p>版权声明：****************</p>
+        </div>
+    </footer>
+    </div>
+</body>
+<script src="./js/script.js"></script>
+
+</html>

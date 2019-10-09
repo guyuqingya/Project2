@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>个人中心</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="images/favicon.ico" type="images/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- import Vue.js -->
+    <script src="./js/vue.min.js"></script>
+    <!-- import stylesheet -->
+    <link href="./css/iview.css" rel="stylesheet">
+    <!-- import iView -->
+    <script src="./js/iview.min.js"></script>
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 200px;
+            height: 500px;
+            background-color: #f1f1f0;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        li a {
+            display: block;
+            color: #000;
+            padding: 8px 16px;
+            text-decoration: none;
+        }
+
+        li a.active {
+            background-color: #8447d4;
+            color: white;
+        }
+
+        li a:hover:not(.active) {
+            background-color: #2f54eb;
+            color: white;
+        }
+
+
+    </style>
+
+</head>
+<body>
+<div id="app">
+    <div style="margin-left: 20%;margin-top: 5%">
+        <div style="float: left;">
+            <ul>
+                <li><a id="jiben_info" class="active"  @click="jiben_info">基本资料</a></li>
+                <li><a id="changee_password" @click="changee_password">修改密码</a></li>
+                <li><a id="bind_eamil" @click="bind_eamil">修改邮箱</a></li>
+            </ul>
+        </div>
+        <div style="float: left;background-color: #f1f1f0;margin-left: 30px;width: 700px;height: 500px">
+            <div id="div1">
+                <div>
+                    <i-button type="primary" style="float: right;margin-top: 5px;margin-right: 5px;background-color: #8447d4" @click="bianji">编辑资料</i-button>
+                </div>
+                <div id="show_info" style="margin-top: 50px;margin-left: 200px;font-size: 20px;display: block">
+                    <img src="images/logo2.png" title="点击更改头像" style="margin-left: 100px">
+                    <br>
+                    <i-input id="bj_name" style="width: 200px;" readOnly="readonly" v-model="name" size="large" >
+                        <span slot="prepend"  >昵称</span>
+                    </i-input><br>
+                    <i-input style="width: 200px;" readonly="readonly" v-model="sex" size="large">
+                        <span slot="prepend">性别</span>
+                    </i-input><br>
+                    <i-input style="width: 200px;" readonly="readonly" v-model="age" size="large">
+                        <span slot="prepend">年龄</span>
+                    </i-input><br>
+                    <i-input style="width: 200px;float: left" readonly="readonly" v-model="role" size="large">
+                        <span slot="prepend">权限</span>
+                    </i-input>
+                </div>
+                <div id="bj_info" style=" ;margin-top: 50px;margin-left: 200px;font-size: 20px;display: none">
+                    <img src="images/logo2.png" title="点击更改头像" style="margin-left: 100px">
+                    <br>
+                    <i-input id="bj_name" style="width: 200px;" v-model="bj_name" size="large">
+                        <span slot="prepend" readOnly="true" >昵称</span>
+                    </i-input><br>
+                    <i-input style="width: 200px;float: left" readonly="readonly"  size="large" v-model="select_sex_1">
+                        <span slot="prepend">性别</span>
+                    </i-input>
+                    <select slot="append" id="select_sex" style="display:block;height: 35px;" @change="select_sex" >
+                        <option value="男">男</option>
+                        <option value="女">女</option>
+                    </select><br>
+                    <i-input style="width: 200px;"  v-model="bj_age" size="large">
+                        <span slot="prepend">年龄</span>
+                    </i-input><br>
+                    <i-input style="width: 200px;float: left" readonly="readonly" v-model="select_role_1" size="large">
+                        <span slot="prepend">权限</span>
+                    </i-input>
+                    <select slot="append" id="select_role" style="display: block;height: 35px;float: left" @change="select_role" >
+                        <option value="学生">学生</option>
+                        <option value="教师">教师</option>
+                        <option value="管理员">管理员</option>
+                    </select>
+                </div>
+                <div style="margin-top: 50px">
+                    <i-button id="save"type="primary" style="float: right;position: center;margin-right: 5px;background-color: #8447d4;display: none" @click="save">保存</i-button>
+                    <i-button id="cancel"type="primary" style="float: right;margin-right: 5px;background-color: #8447d4;display: none"@click="cancel">取消</i-button>
+                </div>
+            </div>
+            <div id="div2" style="display: none;">
+                <div style="font-size: 23px;margin-top: 50px;margin-left: 200px;text-align: center">
+                    <i-input style="width: 390px;margin-top: 10px;" size="large" v-model="send_email">
+                        <span slot="prepend">你的邮箱</span>
+                        <i-button slot="append" type="primary" style="background-color:#8447d4;color: white;" @click="pass_yzm">{{pass_content}}</i-button>
+                    </i-input>
+                    <i-input style="width: 300px;margin-top: 10px;" size="large" v-model="change_pass">
+                        <span slot="prepend">&nbsp;新密码&nbsp;&nbsp;</span>
+                    </i-input>
+                    <i-input style="width: 300px;margin-top: 10px;" size="large" v-model="change_repass">
+                        <span slot="prepend">确认密码</span>
+                    </i-input>
+                    <i-input style="width: 300px;margin-top: 10px;" size="large" v-model="yzm">
+                        <span slot="prepend">&nbsp;验证码&nbsp;&nbsp;</span>
+                    </i-input>
+                    <i-button type="primary" style="margin-top: 20px;background-color: #8447d4;margin-left: -200px" size="large">修改密码</i-button>
+                </div>
+            </div>
+            <div id="div3" style="display: none;">
+                <div style="font-size: 23px;margin-top: 50px;margin-left: 200px;text-align: center">
+                    <i-input style="width: 390px;margin-top: 10px;" size="large" v-model="old_email">
+                        <span slot="prepend">你的邮箱</span>
+                        <i-button slot="append" type="primary" style="background-color:#8447d4;color: white;" @click="send_email_yzm">{{email_content}}</i-button>
+                    </i-input>
+                    <i-input style="width: 300px;margin-top: 10px;" size="large" v-model="email_yzm">
+                        <span slot="prepend">&nbsp;验证码&nbsp;&nbsp;</span>
+                    </i-input>
+                    <i-input style="width: 300px;margin-top: 10px;" size="large" v-model="new_email">
+                        <span slot="prepend">&nbsp;新邮箱&nbsp;&nbsp;</span>
+                    </i-input>
+                    <i-button id="pass_send"type="primary" style="margin-top: 20px;background-color: #8447d4;margin-left: -200px" @click="email_change" size="large">修改邮箱</i-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var app = new Vue({
+        el:'#app',
+        data(){
+            return {
+                name:'1111',
+                sex:'男',
+                age:'21',
+                role:'学生',
+
+                send_email:'',
+                change_pass:'',
+                change_repass:'',
+                yzm:'',
+                old_email:'',
+                email_yzm:'',
+                new_email:'',
+
+                bj_name:'',
+                bj_age:'',
+                select_sex_1:'男',
+                select_role_1:'学生',
+
+                pass_content:'发送验证码',
+                pass_totaltime:60,
+                pass_canClick:true,
+
+                email_content:'发送验证码',
+                email_totaltime:60,
+                email_canClick:true,
+            }
+        },
+        mounted(){
+
+        },
+        methods:{
+            send_email_yzm(){
+                if(this.old_email == '')
+                {
+                    alert("请输入邮箱！")
+                }else{
+                    if(!this.email_canClick) return
+                    this.email_canClick = false
+                    this.email_content = this.email_totaltime + 's后重发'
+                    let clock = window.setInterval(()=>{
+                        this.email_totaltime--
+                        this.email_content = this.email_totaltime + 's后重发'
+                        if(this.email_totaltime < 0){
+                            window.clearInterval(clock)
+                            this.email_content = '发送验证码'
+                            this.email_totaltime = 60
+                            this.email_canClick = true
+                        }
+                    },1000)
+                }
+            },
+            pass_yzm(){
+                if(this.send_email == '')
+                {
+                    alert("请输入邮箱！")
+                }else{
+                    if(!this.pass_canClick) return
+                    this.pass_canClick = false
+                    this.pass_content = this.pass_totaltime + 's后重发'
+                    let clock = window.setInterval(()=>{
+                        this.pass_totaltime--
+                        this.pass_content = this.pass_totaltime + 's后重发'
+                        if(this.pass_totaltime < 0){
+                            window.clearInterval(clock)
+                            this.pass_content = '发送验证码'
+                            this.pass_totaltime = 60
+                            this.pass_canClick = true
+                        }
+                    },1000)
+                }
+            },
+            select_role(){
+                this.select_role_1 = document.getElementById('select_role').value
+            },
+            select_sex(){
+                this.select_sex_1 = document.getElementById('select_sex').value;
+
+            },
+            email_send(){
+                document.getElementById('old_email').readOnly="readonly"
+            },
+            email_change(){
+
+            },
+            pass_change(){
+
+            },
+            pass_send(){
+                document.getElementById('email').readOnly="readonly"
+            },
+            save(){
+
+            },
+            cancel(){
+                document.getElementById('save').style.display = "none"
+                document.getElementById('cancel').style.display = "none"
+                document.getElementById('show_info').style.display = "block"
+                document.getElementById('bj_info').style.display = "none"
+
+            },
+            bianji(){
+                document.getElementById('show_info').style.display = "none"
+                document.getElementById('bj_info').style.display = "block"
+                document.getElementById('save').style.display = "block"
+                document.getElementById('cancel').style.display = "block"
+            },
+            change_tou(){
+
+            },
+            jiben_info(){
+                document.getElementById('jiben_info').className = "active"
+                document.getElementById('changee_password').className = ""
+                document.getElementById('bind_eamil').className = ""
+                document.getElementById('div1').style.display = "block"
+                document.getElementById("div2").style.display = "none"
+                document.getElementById('div3').style.display = "none"
+            },
+            changee_password(){
+                document.getElementById('jiben_info').className = ""
+                document.getElementById('changee_password').className = "active"
+                document.getElementById('bind_eamil').className = ""
+                document.getElementById('div1').style.display = "none"
+                document.getElementById("div2").style.display = "block"
+                document.getElementById('div3').style.display = "none"
+            },
+            bind_eamil(){
+                document.getElementById('jiben_info').className = ""
+                document.getElementById('changee_password').className = ""
+                document.getElementById('bind_eamil').className = "active"
+                document.getElementById('div1').style.display = "none"
+                document.getElementById("div2").style.display = "none"
+                document.getElementById('div3').style.display = "block"
+            },
+        },
+    })
+</script>
+</body>
+
+</html>

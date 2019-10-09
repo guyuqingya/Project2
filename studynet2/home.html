@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>实验环境</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="images/favicon.ico" type="images/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/running.css">
+    <!-- import Vue.js -->
+    <script src="./js/vue.min.js"></script>
+    <!-- import stylesheet -->
+    <link href="./css/iview.css" rel="stylesheet">
+    <!-- import iView -->
+    <script src="./js/iview.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <div id="txt_view">
+        <div style="width: 30%;border: 1px;background-color: black">
+            <div style="display: inline">
+                <i-button type="success" ghost>返回</i-button>
+                <i-button type="success" ghost>实验文档</i-button>
+                <i-button type="success" ghost>实验报告</i-button>
+            </div>
+            <div style="display: inline;float: right">
+                <i-button type="success" icon="ios-chatbubbles" @click="modal_ask = true">我要提问</i-button>
+                <modal
+                        v-model="modal_ask"
+                        :mask-closable = "false"
+                        width = "500px"
+                        title = "我要提问"
+                        @on-ok = "ok"
+                        @on-cancel="cancel">
+                    <div style="margin-left:6%">
+                        <input type="text" style="width:403px" placeholder="请输入问题"/>
+                    </div>
+                    <br>
+                    <div style="margin-left:6%">
+                        <textarea cols="64" rows="5" placeholder="请输入问题描述" resize="none"></textarea>
+                    </div>
+                </modal>
+                <i-button type="success" icon="ios-chatbubbles" @click="offtxt">隐藏文档</i-button>
+            </div>
+        </div>
+        <iframe src="" class="txt_view" frameborder="0"  scrolling="yes"></iframe>
+    </div>
+    <div id="show_txt" style="display: none">
+        <i-button @click="ontxt" >显示文档</i-button>
+    </div>
+    <iframe id="run_view" src="" class="shiyan_view" frameborder="0" scrolling="no"> </iframe>
+</div>
+<script src="./js/running.js"></script>
+
+</body>
+
+</html>

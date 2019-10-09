@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>云课堂在线教育平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="images/favicon.ico" type="images/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script text="text/javascript" src="./js/script.js"></script>
+    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+</head>
+
+<body >
+
+    <!-- 结构     -->
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="images/logo1.png" alt="云课堂">
+            </div>
+            <!-- 导航栏部分 -->
+            <div class="navbar" id="tag">
+                <ul>
+                    <li>
+                        <a href="#" class="navbar_border" id="page1">首页</a>
+                        <a href="#" id="page2">课程</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 登录部分 -->
+            <div class="login" id="js-login">
+                <input class="login-submit-show" type="submit" name="log" value="登 录">
+            </div>
+
+            <div class="dropdown" id="people">
+                <div>
+                    <img src="./icon-images/个人.png" alt="个人中心">
+                </div>
+                <div class="dropdown-content">
+                    <a onclick="person_center()">个人中心</a>
+                    <a onclick="quit()">退出</a>
+                </div>
+            </div>
+
+
+            <div class="login-mask" id="mask"></div>
+            <!-- 登录弹窗 -->
+            <div class="login-interface" id="login-interface">
+                <div class="login-interface-frame">
+                    <div class="login-close" id="login-close">
+                        <a href="#"><img src="./icon-images/关闭2.png" alt="叉叉" width="20px" height="20px"></a>
+                    </div>
+                    <div class="login-title">
+                        <ul class="login-title-1">
+                            <li id="log"><a href="#">登录</a></li>
+                            <li id="reg"><a href="#">注册</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="login-write-frame" id="login-write-frame">
+                        <!-- 登录的内容部分 -->
+                        <div class="login-username">
+                            <!-- 用户名 -->
+                            <div class="login-username-img">
+                                <img src="./icon-images/邮件.png" alt="邮箱">
+                            </div>
+                            <input type="text" name="kong0" placeholder=" 请输入邮箱" id="sign-in-username">
+                        </div>
+
+                        <div class="login-password">
+                            <!-- 密码 -->
+                            <div class="login-password-img">
+                                <img src="./icon-images/密码.png" alt="密码">
+                            </div>
+                            <input type="password" name="kong0" placeholder=" 请输入密码" id="sign-in-password">
+                        </div>
+
+                        <div class="login-forget">
+                            <!-- 忘记密码 -->
+                            <a href="Forget.html">忘记密码?</a>
+                        </div>
+
+                        <div class="login-in" id="login-in">
+                            <!-- 登录进去 -->
+                            <a>进入云课堂</a>
+                        </div>
+
+                        <div class="login-line">
+                            <p>其他登录</p>
+                        </div>
+
+                        <div class="login-other">
+                            <div class="login-other-frame">
+                                <a href="#"><img src="./icon-images/qq.png" alt="其他登录"></a>
+                                <a href="#"><img src="./icon-images/微信.png" alt="其他登录"></a>
+                                <a href="#"><img src="./icon-images/微博.png" alt="其他登录"></a>
+                                <a href="#"><img src="./icon-images/GitHub.png" alt="其他登录"></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 注册内容部分 1 -->
+                    <div class="reg-write-frame" id="reg-write-frame">
+                        <div class="login-username">
+                            <!-- 注册用户名 -->
+                            <div class="login-username-img">
+                                <img src="./icon-images/邮件.png" alt="邮箱">
+                            </div>
+                            <input type="text" name="kong1" placeholder=" 请输入邮箱" id="sign-up-username">
+                        </div>
+
+                        <div class="login-password">
+                            <!-- 注册密码 -->
+                            <div class="login-password-img">
+                                <img src="./icon-images/密码.png" alt="密码">
+                            </div>
+                            <input type="password" name="kong1" placeholder=" 请输入密码" id="sign-up-password">
+                        </div>
+                        <div class="login-password">
+                            <!-- 注册密码 -->
+                            <div class="login-password-img">
+                                <img src="./icon-images/密码.png" alt="密码">
+                            </div>
+                            <input type="password" name="kong1" placeholder=" 再次请输入密码" id="sign-up-again-password">
+                        </div>
+
+                        <div class="verify">
+                            <input type="text" name="kong1" placeholder=" 请输入验证码" id="verify-num">
+                            <!-- <input type="button" class="hmac" value="获取验证码"> -->
+                            <button class="hmac">获取验证码</button>
+                        </div>
+
+                        <div class="reg-in" id="next">
+                            <a href="#">注册</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- 登录错误提示 -->
+            <div class="tips-one" id="t-one">
+                <p>用户名或密码错误</p>
+            </div>
+
+            <!-- 搜索框部分 -->
+            <div class="search">
+                <form action="">
+                    <input type="text" name="find" placeholder="请输入关键词">
+                    <!-- placeholder占位符 内容输入自动清除默认值 -->
+                    <input type="submit" value="查询">
+                </form>
+            </div>
+        </nav>
+    </header>
+
+
+    <!-- 主页面部分 -->
+    <div id="home1" class="main_show">
+        <!-- banner部分 -->
+        <div class="banner">
+            <div class="banner-in container">
+                <!-- 多类名  container为公共类-->
+
+                <!-- 左侧导航栏，侧边栏 -->
+                <div class="slidebar" id="sort">
+                    <ul>
+                        <li>
+                            <div>
+                                <a href="#">后端开发</a>
+                                <a href="#">Python</a>
+                                <a href="#">PHP</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <a href="#">Linu运维</a>
+                                <a href="#">Linux</a>
+                                <a href="#">Shell</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <a href="#">云计算与大数据</a>
+                                <a href="#">Hadoop</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <a href="#">数据库</a>
+                                <a href="#">SQL</a>
+                                <a href="#">NoSQL</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <a href="#">信息安全</a>
+                                <a href="#">Web安全</a>
+                                <a href="#">安全开发</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <a href="#">web前端</a>
+                                <a href="#">HTML5</a>
+                                <a href="#">Web</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <a href="#">计算机专业课</a>
+                                <a href="#">C语言编程技术</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="slidebar-right">
+
+                </div>
+
+                <div>
+                    <img src="./images/blog.png" alt="">
+                </div>
+
+                <!-- 小课表 -->
+                <!-- <dl class="timetable">
+                <dt>我的课程表</dt>
+                <dd>
+                    <h4>《linux内核技术》</h4>
+                </dd>
+                <dd>
+                    <h4>《linux内核技术》</h4>
+                </dd>
+                <dd>
+                    <h4>《linux内核技术》</h4>
+                </dd>
+                <dd>
+                    <a href="#">全部课程</a>
+                </dd>
+            </dl> -->
+            </div>
+        </div>
+
+        <!-- 课程部分 -->
+        <div class="course container">
+            <div class="course-hd">
+                <h4>推荐课程</h4>
+            </div>
+            <div class="course-bd" id="course-recommend">
+
+            </div>
+        </div>
+    </div>
+
+    <!-- 课程界面部分 -->
+    <div class="container">
+        <div id="home2" class="main_hide">
+
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>版权声明：****************</p>
+        </div>
+    </footer>
+</body>
+
+<script>
+</script>
+
+</html>

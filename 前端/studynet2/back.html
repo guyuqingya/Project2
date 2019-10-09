@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="css/back.css" />
+		<link rel="stylesheet" href="css/course_main.css">
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<script src="https://unpkg.com/vue"></script>
+		<script src="./js/axios_config.js"></script>
+
+	</head>
+	<body>
+		<div class="backstagemanage" id="app" >
+			<div class="back_head">
+<!--插入图片--><div id="have">
+				<div class="logo">
+					<img src="images/logo1.png" />
+				</div>
+<!--选择-->
+				<div class="back_choice">
+					<ul id="inittree">
+						<li>
+							<a href="#"  class="checked" id="user_guanli" onclick="user_guanli()">用户管理</a>
+						</li>
+						<li>
+							<a href="#" class="" id="course_guanli" onclick="course_guanli()">课程管理</a>
+						</li>
+					</ul>
+				</div>
+<!--用户信息-->
+				<div class="inf">
+					<label class="name" id="nname" style="border: 0px">{{user_name}}</label>
+					<button style="color: blue" onclick="back_exit()">退出登录</button>
+				</div>
+			</div>
+			</div>
+			
+			<!-- 用户管理 -->			
+			<div class="back_main user" style="display: block"  id="back_user">
+				<div class="back_main_inf">
+					<div class="inf_head">
+						<!--<div class="main_inf_head_cha">-->
+							<!--&lt;!&ndash; <input type="text" name="id"/> &ndash;&gt;-->
+							<!---->
+							<!--<p>身份权限&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+							<!--<select name="id" id="id">-->
+								<!--&lt;!&ndash;<option value="total">全部</option>&ndash;&gt;-->
+								<!--<option value="student">学生</option>-->
+								<!--<option value="teacher">教师</option>-->
+								<!--<option value="admin">管理员</option>-->
+							<!--</select></p>-->
+						<!--</div>-->
+						<div class="main_inf_head_cha">
+							<p>用户ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="searchmail" type="text" name="autho"/></p>
+						</div>
+						<div class="main_inf_head_cha"><button class="butt" @click="find_user">查询</button></div>
+						<div class="main_inf_head_cha but"><button class="butt" id="add">+新建用户</button></div>
+					</div>
+					<div class="inf_function">
+						<div class="inf_function_head">
+							<div class="three" id="nicheng">昵称</div>
+							<div class="three" id="youxiang">邮箱</div>
+							<div class="three" id="quanxian">权限</div>
+
+						</div>
+						<table style="width: 1170px;margin-top: 5px">
+							<tr v-for="user in users">
+								<td>{{user.id}}</td>
+								<td>{{user.email}}</td>
+								<td>{{user.role}}</td>
+							</tr>
+						</table>
+						<!--<div class="inf_function_main">-->
+						<!--</div>-->
+					</div>
+				</div>
+			</div>
+
+			<!-- 用户添加弹窗 -->
+			<div id="addp">
+				<div class="close">
+					<img class="pic" src="images/关闭.png" />
+				</div>
+				<div class="head">
+					<h3>添加用户</h3>
+				</div>
+				<div class="inf">
+					邮箱<input type="text" class="su"/>
+				</div>
+				<div class="out">
+					<p></p>
+				</div>
+				<div class="bottom">
+					<input type="button" value="取消" class="cancel"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="button" value="提交" class="submit"/>
+				</div>
+			</div>
+
+			<!--挡板-->
+			<div class="courseMask" id="mask" style="display: none"></div>
+
+			<!--添加课程弹框-->
+			<div class="addFile" id="addFile" style="display: none">
+
+				<div class="closePopUp"  id="closePopUp">
+					<img src="./images/关闭.png" alt="叉叉" width="20px" height="20px">
+				</div>
+
+				<input id="files" type="file" multiple="multiple" style="outline:none" />
+
+			</div>
+
+			<!--课程管理-->
+			<div class="back_main lesson" id="back_course" >
+				<div class="back_main_inf">
+					<div class="course_main_top">
+						<form id="topFrom">
+							<!--<fieldset class="field1">-->
+								<!--<span>课程分类</span>-->
+								<!--<select id="choseType">-->
+									<!--<option value ="Linux" ><p>Linux</p></option>-->
+									<!--<option value ="前端"><p>前端</p></option>-->
+									<!--<option value="后端"><p>后端</p></option>-->
+									<!--<option value="数据结构与算法"><p>数据结构与算法</p></option>-->
+								<!--</select>-->
+							<!--</fieldset>-->
+							<!--<fieldset class="field2">-->
+								<!--<input type="text" placeholder="请输入" name="q"/>-->
+								<!--<input type="button" value="搜索"/>-->
+							<!--</fieldset>-->
+							<fieldset class="field3">
+								<button id="addCourse">添加课程</button>
+							</fieldset>
+						</form>
+					</div><!--end of course_main_top-->
+					<div class="course_main_table">
+						<table id="courseTable" border="1px" cellpadding="0" cellspacing="0">
+							<thead>
+								<tr class="tbTr">
+									<th>
+										<input id="cbAll" type="checkbox" />全选
+									</th>
+									<th>课程ID</th>
+									<th>课程名称</th>
+									<th>课程分类</th>
+									<th>课程教师</th>
+									<th>课程简介</th>
+								</tr>
+							</thead>
+							<tbody id = "cbs"></tbody>
+						</table>
+						<div class="paging">
+							此处写翻页代码
+						</div><!--end of paging-->
+					</div>
+					<div class="course_main_bottom">
+						<div class="buttonBox">
+							<div>
+								<button class="exportCou" id="exportCou">导出课程包</button>
+								<button class="deleteCou" id="deleteCou" @click="delete_course">删除</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+	<script type="text/javascript" src="js/back.js"></script>
+	<script src="js/courseMain.js"></script>
+</html>

@@ -1,0 +1,707 @@
+        /* 样式 */
+        /* css初始化 */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            /* 清除内外边距 */
+        }
+        
+        ul {
+            list-style: none;
+            /* 去掉列表样式小点 */
+        }
+        
+        .clearfix::before,
+        .clearfix::after {
+            display: table;
+            content: "";
+        }
+        
+        .clearfix::after {
+            clear: both;
+        }
+        
+        .clearfix {
+            *zoom: 1;
+            /* 清除浮动 */
+        }
+        
+        a {
+            color: #050505;
+            text-decoration: none;
+            /* 取消下划线 */
+        }
+        
+        .container {
+            /* 版心宽度1200px 都要居中对齐 */
+            width: 1200px;
+            margin: 0 auto;
+        }
+        /* *********头部********************************* */
+        
+        body {
+            width: 100%;
+            min-width: 1400px;
+            background-color: #f3f5f7;
+        }
+        
+        header {
+            width: 100%;
+            height: 100px;
+            /* background-color: pink; */
+            display: flex;
+            /* overflow: hidden; */
+        }
+        
+        nav {
+            width: 1366px;
+            height: 50px;
+            /* background-color: purple; */
+            margin: 27px auto;
+        }
+        
+        .logo {
+            float: left;
+            width: 180px;
+            height: 50px;
+            margin-right: 25px;
+            /* background-color: burlywood; */
+        }
+        
+        .navbar {
+            float: left;
+            height: 50px;
+            line-height: 50px;
+            /* 行高会继承 */
+        }
+        
+        .navbar li {
+            float: left;
+        }
+        
+        .navbar li a {
+            float: left;
+            /* 上下0 左右8像素 */
+            padding: 0 30px;
+            /* a是行内元素，给高需要转换块级 */
+            margin: 0 20px;
+            display: block;
+            height: 50px;
+            font-size: 23px;
+            letter-spacing: 4px;
+            font-weight: 700;
+        }
+        
+        .navbar_border {
+            border-bottom: 2px solid #5716ac;
+        }
+        
+        .navbar li a:hover {
+            border-bottom: 2px solid #5716ac;
+        }
+        /* 登录部分************************************************** */
+        
+        .login {
+            display: flex;
+            float: right;
+        }
+        
+        .login-submit-show {
+            margin-top: 5px;
+            width: 80px;
+            height: 38px;
+            /* float: right; */
+            background-color: #5716ac;
+            border: none;
+            color: #fff;
+            padding: 0 15px;
+            margin-left: 50px;
+            font-size: 18px;
+            letter-spacing: 4px;
+            font-weight: 700;
+            border: 1px solid #5716ac;
+        }
+        
+        .login-submit-show:hover {
+            background-color: #fff;
+            color: #5716ac;
+        }
+        
+        .login-submit-hide {
+            display: none;
+        }
+        
+        .dropdown {
+            position: relative;
+            display: none;
+            float: right;
+            flex-direction: column;
+        }
+        
+        .dropdown img {
+            margin-top: 5px;
+            width: 40px;
+            height: 40px;
+            float: right;
+            margin-left: 30px;
+        }
+        
+        .dropdown-content {
+            /* z-index: 20; */
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            margin-top: 45px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            padding: 12px 16px;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        
+        .dropdown a:hover {
+            color: rgb(126, 126, 126);
+        }
+        /* 登录弹窗****************************************************** */
+        
+        .login-mask {
+            height: 100%;
+            width: 100%;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 9;
+            background: rgba(0, 0, 0, 0.3);
+            display: none;
+        }
+        
+        .login-interface {
+            /* 登录弹窗界面 */
+            position: fixed;
+            left: 39%;
+            top: 120px;
+            width: 350px;
+            height: 425px;/*375*/
+            border: 2px solid #4e4e4e;
+            border-radius: 15px;
+            background-color: #f3f5f7;
+            /* background: url(../images/边框.png); */
+            z-index: 10;
+            /* display: flex; */
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .login-interface-frame {
+            /* 登录弹窗容器 */
+            /* background-color: skyblue; */
+            /* height: 300px; */
+            width: 300px;
+            height: 355px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        
+        .login-close {
+            /* X部分 */
+            height: 10px;
+            display: flex;
+            justify-content: flex-end;
+        }
+        /* 第一行：登录标题 */
+        /* .login-title ul {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #ccc;
+        }
+        
+        .login-title li {
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        } */
+        /* .login-title li:hover {
+            border-bottom: 2px solid #8447d4;
+        } */
+        /* .login-title a {
+            color: #4e4e4e;
+            font-size: 30px;
+            letter-spacing: 3px;
+            font-weight: 800;
+        } */
+        /* 登录标题 */
+        
+        .login-title {
+            /* background-color: pink; */
+            height: 50px;
+            color: #4e4e4e;
+            font-size: 30px;
+            letter-spacing: 3px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .login-title-1 {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .login-title-1 li {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50%;
+            /* border-bottom: 2px solid #ccc; */
+        }
+        
+        .login-title-1 li:nth-child(1) {
+            border-bottom: 2px solid #5716ac;
+        }
+        
+        .login-title-1 li:nth-child(2) {
+            border-bottom: 2px solid #ccc;
+        }
+        /* .login-title-1 li:hover {
+            border-bottom: 2px solid #5716ac;
+            z-index: 11;
+        } */
+        
+        .login-title-1 a {
+            text-align: center;
+            /* width: 100%; */
+        }
+        /* 登录的内容部分 *****************************/
+        
+        .login-write-frame {
+            display: flex;
+            flex-direction: column;
+        }
+        /* 用户名 和 密码 部分 */
+        
+        .login-username,
+        .login-password,
+        .login-email {
+            width: 100%;
+            height: 40px;
+            background-color: pink;
+            margin-bottom: 15px;
+            border-radius: 10px 0px 0px 10px;
+            display: flex;
+            /* justify-content: center;
+            align-items: center; */
+        }
+        
+        .login-username-img,
+        .login-password-img,
+        .login-email-img {
+            width: 70px;
+            height: 40px;
+            border-radius: 10px 0px 0px 10px;
+            background-color: #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .login-username-img img,
+        .login-password-img img,
+        .login-email-img img {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .login-username input[type=text],
+        .login-password input[type=password],
+        .login-email input[type=email] {
+            outline: none;
+            width: 100%;
+        }
+        /* 忘记密码部分 */
+        
+        .login-forget a {
+            width: 100%;
+            height: 20px;
+            /* background-color: pink; */
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: row-reverse;
+            color: #ccc;
+        }
+        
+        .login-forget a:hover {
+            color: #5716ac;
+        }
+        
+        .login-in,
+        .reg-in {
+            width: 100%;
+            height: 40px;
+            /* background-color: pink; */
+            margin-bottom: 15px;
+            display: flex;
+        }
+        
+        .login-in a,
+        .reg-in a {
+            border: 1px solid #ccc;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            color: #8447d4;
+            font-size: 25px;
+            letter-spacing: 2px;
+            font-weight: 800;
+            padding-top: 3px;
+            box-sizing: border-box;
+        }
+        
+        .login-in a:hover,
+        .reg-in a:hover {
+            background-color: #8447d4;
+            color: white;
+            cursor: pointer;
+        }
+        
+        .login-line {
+            margin: 10px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* border-bottom: 1px dotted rgba(0, 0, 0, 0.3) */
+        }
+        
+        .login-line p {
+            text-align: center;
+            color: rgba(0, 0, 0, 0.3);
+        }
+        
+        .login-line p:before,
+        .login-line p:after {
+            /* border-bottom: 1px dotted rgba(0, 0, 0, 0.3); */
+            content: "-----------------";
+        }
+        
+        .login-other {
+            /* width: 80%; */
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* background-color: pink; */
+        }
+        
+        .login-other-frame {
+            width: 80%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .login-other a {
+            width: 25%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .login-other img {
+            width: 30px;
+        }
+        /* 注册内容部分****************************** */
+        
+        .reg-write-frame {
+            display: none;
+            flex-direction: column;
+            /* background-color: pink; */
+        }
+        
+        .reg-write-frame2 {
+            display: none;
+            flex-direction: column;
+            /* background-color: pink; */
+        }
+        
+        .verify {
+            width: 100%;
+            height: 40px;
+            /* background-color: pink; */
+            margin-bottom: 15px;
+            /* border-radius: 10px 0px 0px 10px; */
+            display: flex;
+        }
+        
+        .verify input[type=text] {
+            width: 60%;
+            outline: none;
+            /* border-radius: 10px 0px 0px 10px; */
+            /* background-color: #ccc; */
+        }
+        
+        .verify button {
+            width: 40%;
+            margin-left: 10px;
+            border-radius: 10px 10px;
+            outline: none;
+        }
+        /* 用户登录错误提示 */
+        
+        .tips-one {
+            position: absolute;
+            position: absolute;
+            left: 45%;
+            top: 120px;
+            z-index: 11;
+            display: none;
+            font-size: 18px;
+            color: rgba(255, 4, 4, 0.616);
+        }
+        
+        .tips-one img {
+            width: 200px;
+            height: 100px;
+        }
+        /* 搜索框部分**************************************************  */
+        
+        .search {
+            margin-top: 5px;
+            width: 410px;
+            /* 360 + 50 */
+            height: 38px;
+            border: 1px solid #5716ac;
+            float: right;
+        }
+        
+        .search input[type=text] {
+            /* 属性选择器 */
+            width: 336px;
+            height: 34px;
+            /* background-color: pink; */
+            padding-left: 20px;
+            float: left;
+            outline: none;
+        }
+        
+        .search input[type=submit] {
+            width: 50px;
+            height: 38px;
+            background-color: #5716ac;
+            border: 1px solid #5716ac;
+            color: #fff;
+            float: left;
+            outline: none;
+        }
+        
+        .search input[type=submit]:hover {
+            color: #5716ac;
+            background-color: #fff;
+        }
+        /* banner start*********************************************** */
+        
+        .banner {
+            height: 420px;
+            background: #daa403;
+            display: flex;
+        }
+        
+        .banner-in {
+            display: flex;
+        }
+        
+        .slidebar {
+            height: 420px;
+            width: 300px;
+            background: rgba(0, 0, 0, 0.212);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .slidebar ul {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .slidebar li {
+            display: flex;
+            height: 56px;
+            justify-content: center;
+            /* background-color: #fff; */
+        }
+        
+        .slidebar li div {
+            width: 260px;
+            color: #fff;
+            border-bottom: 1px solid #ccc;
+            display: flex;
+            /* margin: 0, 20px; */
+        }
+        
+        .slidebar a {
+            text-align: center;
+            font-size: 16px;
+            margin: 17px 10px;
+            color: inherit;
+        }
+        
+        .slidebar li:hover {
+            background-color: #fff;
+        }
+        
+        .slidebar li:hover a {
+            color: #3f3f3f;
+        }
+        
+        .slidebar li a:hover {
+            color: #8447d4;
+            font-weight: 800;
+        }
+        /* 滑竿右侧***********************************************/
+        /* .slidebar-right {
+            position: absolute;
+            left: 450px;
+            height: 420px;
+            width: 350px;
+            background: #fff;
+        } */
+        /* 课表部分***********************************************/
+        
+        .timetable {
+            float: right;
+            width: 200px;
+            height: 300px;
+            background-color: white;
+            margin-top: 50px;
+        }
+        
+        .timetable dt {
+            height: 50px;
+            line-height: 50px;
+            background: #8447d4;
+            /* 文字水平居中，margin：auto 是盒子水平居中 */
+            text-align: center;
+            color: #fff;
+            /* 文字加粗 */
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 5px;
+            margin-bottom: 3px;
+        }
+        
+        .timetable dd {
+            width: 180px;
+            height: 60px;
+            margin: 0 auto;
+            border-bottom: 1px solid#ccc;
+            overflow: hidden;
+            padding-top: 12px;
+            box-sizing: border-box;
+        }
+        
+        .timetable dd:last-child {
+            /* 结构伪类选择器：选最后一个孩子，但是要求这个孩子是dd*/
+            border: 0;
+        }
+        
+        .timetable dd h4 {
+            color: #4e4e4e;
+            padding-top: 18px;
+            box-sizing: border-box;
+        }
+        
+        .timetable dd h4:hover {
+            color: #5716ac;
+        }
+        
+        .timetable dd a {
+            height: 40px;
+            display: block;
+            border: 1px solid #5716ac;
+            text-align: center;
+            line-height: 40px;
+            color: #5716ac;
+            font-weight: 800;
+            font-size: 20px;
+            letter-spacing: 5px;
+        }
+        
+        .timetable dd a:hover {
+            background-color: #5716ac;
+            color: white;
+        }
+        /* 课程部分***************************************************** */
+        
+        .course {
+            margin-top: 25px;
+        }
+        
+        .course-hd {
+            font-size: 23px;
+            color: rgb(126, 126, 126);
+            letter-spacing: 3px;
+        }
+        
+        .course-bd {
+            width: 1200px;
+            /* background-color: rgb(255, 252, 215); */
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .course-bd div {
+            width: 250px;
+            height: 300px;
+            border: 2px solid rgb(0, 0, 0, 0.1);
+            /* background-color: #8447d4; */
+            margin: 23px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .course-bd h3 {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+        
+        .course-bd div p {
+            color: #ccc;
+            word-wrap: break-word;
+        }
+        
+        .course-bd h3:hover,
+        .course-bd p:hover {
+            cursor: pointer;
+        }
+        
+        .course-bd div:nth-child(4n+1) {
+            margin-left: 0;
+        }
+        /* 首页 */
+        
+        .main_show {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .main_hide {
+            display: none;
+        }
+        /* 底部************************************************************** */
+        
+        footer {
+            background: rgba(219, 217, 217, 0.3);
+            height: 30px;
+        }

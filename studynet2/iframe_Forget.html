@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>忘记密码</title>
+    <!-- import Vue.js -->
+    <script src="./js/vue.min.js"></script>
+    <!-- import stylesheet -->
+    <link href="./css/iview.css" rel="stylesheet">
+    <!-- import iView -->
+    <script src="./js/iview.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+</head>
+<body style="text-align: center">
+<div id = "app">
+    <div style="width: 1100px;height: 400px;background-color:white;margin:0 auto; text-align: center;margin-top: 100px">
+        <div style="text-align: center;">
+            <br>
+            <span style="font-size:medium">忘记密码</span>
+            <hr style="margin-top: 10px;">
+            <div style="margin-top: 10px;">
+                <span style="font-size:medium;">通过邮箱重置密码</span>
+                <i-input style="width: 390px;margin-left: 370px;margin-top: 10px;" size="large" v-model="send_email">
+                    <span slot="prepend">你的邮箱</span>
+                    <i-button id='send_yzm' slot="append" type="primary" style="background-color:#8447d4;color: white;" @click="send_yzm" >{{content}}</i-button>
+                </i-input>
+                <i-input style="width: 300px;margin-left: 370px;margin-top: 10px;" size="large" v-model="new_pass">
+                    <span slot="prepend">&nbsp;新密码&nbsp;&nbsp;</span>
+                </i-input>
+                <i-input style="width: 300px;margin-left: 370px;margin-top: 10px;" size="large" v-model="re_pass">
+                    <span slot="prepend">确认密码</span>
+                </i-input>
+                <i-input style="width: 300px;margin-left: 370px;margin-top: 10px;" size="large" v-model="yzm">
+                    <span slot="prepend">&nbsp;验 证码&nbsp;&nbsp;</span>
+                </i-input>
+                <i-button type="primary" style="margin-top: 20px;background-color: #8447d4" size="large" @click="change_pass">重置密码</i-button>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        var app = new Vue({
+            el:'#app',
+            data(){
+                return {
+                    send_email: '',
+                    new_pass:'',
+                    re_pass:'',
+                    yzm:'',
+                    content:'发送验证码',
+                    totaltime:60,
+                    canClick:true,
+                }
+            },
+            methods:{
+                send_yzm()
+                {
+                    if(this.send_email == '')
+                    {
+                        alert("请输入邮箱！")
+                    }else{
+                        if(!this.canClick) return
+                        this.canClick = false
+                        this.content = this.totaltime + 's后重发'
+                        let clock = window.setInterval(()=>{
+                            this.totaltime--
+                            this.content = this.totaltime + 's后重发'
+                            if(this.totaltime < 0){
+                                window.clearInterval(clock)
+                                this.content = '发送验证码'
+                                this.totaltime = 60
+                                this.canClick = true
+                            }
+                        },1000)
+                    }
+                },
+                change_pass(){
+                    if(this.new_pass == '')
+                    {
+                        alert('请输入新密码！')
+                    }else if(this.re_pass == '')
+                    {
+                        alert('请确认密码！')
+                    }else if(this.new_pass != this.re_pass){
+                        alert('两次密码不一致，请重新输入！')
+                    }else{
+
+                    }
+                }
+            }
+
+        })
+    </script>
+</div>
+
+</body>
+</html>

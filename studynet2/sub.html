@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- import Vue.js -->
+    <script src="./js/vue.min.js"></script>
+    <!-- import stylesheet -->
+    <link href="./css/iview.css" rel="stylesheet">
+    <!-- import iView -->
+    <script src="./js/iview.min.js"></script>
+    <meta http-equiv="Content-Type" content="multipart/form-data; charset=utf-8" />
+</head>
+<body>
+<div id="app">
+    <input style="background-color:#00ffff;margin-left: 50px" id='page_zzc' type="file" accept="image/*" @change="getFile1($event)">
+    <button  @click="submitForm($event)" type="success" size="large">提交</button>
+    <img src="" id="i1" style="width: 500px;height: 500px">
+</div>
+    <script>
+        var app = new Vue({
+            el:"#app",
+            data(){
+                return {
+                    file1:'',
+                    img:'',
+                }
+            },
+            mounted(){
+                axios({
+                    url:'http://192.168.100.60:8080/cloud_class/watchPhoto',
+                    method:'POST',
+                    params:{
+                        id:'3'
+                    },
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    },
+                    contentType: "application/json",
+                    dataType:'json',
+                    responseType: 'arraybuffer'
+                }).then(res=>{
+                    this.img =  'data:image/png;base64,' + btoa(
+                        new Uint8Array(res.data).reduce((data, byte) => data + String.fromCharCode(byte), '')
+                    )
+                    document.getElementById("i1").src = this.img
+                })
+            },
+            methods:{
+                getFile1(event) {
+                    this.file1 = event.target.files[0];
+                },
+                submitForm(event){
+                    let formdData = new FormData()
+                    formdData.append('photo',this.file1);
+                    axios({
+                        url:'http://192.168.100.60:8080/cloud_class/photo',
+                        method:'POST',
+                        data:formdData,
+                        // headers: {
+                        //     'Content-Type': 'multipart/form-data'
+                        // },
+                        // contentType: "application/json",
+                        // dataType:'json',
+                    }).then()
+                },
+            }
+        })
+    </script>
+</body>
+</html>
